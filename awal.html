@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takdir Suci Benang Merah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================== */
+        /* 1. BASE STYLES & FONT-FACE                     */
+        /* ============================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: white;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            /* Pusatkan kontainer secara horizontal dan vertikal */
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            padding: 10px; 
+            overflow: auto; /* Memungkinkan scrolling di mobile */
+        }
+
+        /* * FONT 'GLIKER' - Dibiarkan tidak berubah */
+        @font-face {
+            font-family: 'Gliker';
+            src: url('gliker-black.woff2') format('woff2'),
+                 url('gliker-black.woff') format('woff');
+            font-weight: 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* * INI ADALAH IMPLEMENTASI PENSKALAAAN (SCALING)
+        * Kontainer dikunci pada LEBAR 313px dan diskalakan proporsional.
+        */
+        .mobile-wrapper {
+            /* Lebar Kunci Desain Anda: 313px */
+            width: 313px; 
+            
+            overflow: hidden; 
+            position: relative;
+            
+            /* Teknik penskalaan: Skala kontainer berdasarkan perbandingan lebar viewport dan lebar tetap (313px). */
+            transform-origin: top center;
+            transform: scale(calc(100vw / 313)); 
+            
+            /* Batasan: Di desktop/layar lebar (> 313px), skala dibatasi agar tidak terlalu besar */
+            max-width: 100vw;
+        }
+
+        /* Media query untuk Desktop (Memastikan tampilan tidak zoom berlebihan) */
+        @media (min-width: 314px) {
+            .mobile-wrapper {
+                /* Saat layar lebih lebar dari 313px, kita kunci skala 1:1 dan lebar 313px */
+                transform: scale(calc(313 / 313)); 
+                width: 313px;
+            }
+        }
+        
+
+        /* Link Style Reset */
+        .character-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ============================================== */
+        /* 2. JUDUL UTAMA (HEADER) - Konversi ke PX       */
+        /* ============================================== */
+
+        .header-section {
+            /* 5vw -> 15.65px @ 313px */
+            padding: 30px 16px 40px; 
+            text-align: center;
+            position: relative;
+            z-index: 3;
+        }
+
+        .header-section h1 {
+            font-family: 'Gliker', 'Poppins', sans-serif;
+            /* 6.5vw -> 20.34px @ 313px */
+            font-size: 20px; 
+            font-weight: 900;
+            color: black;
+            line-height: 1.2;
+            text-shadow: 
+                0.3px 0.3px 0 #000, -0.3px -0.3px 0 #000;
+        }
+
+        /* ============================================== */
+        /* 3. BAGIAN KARAKTER (KARA & WOWO) - Konversi ke PX */
+        /* ============================================== */
+
+        .character-section {
+            /* 5vw -> 15.65px @ 313px */
+            padding: 10px 16px; 
+        }
+
+        .wowo-section {
+            margin-top: 20px; 
+        }
+        
+        .character-section h2{
+           background-color:#ff07076e;
+           border-radius: 10px;
+           padding-left: 10px;
+           padding-right: 10px;
+           /* 3.8vw -> 11.89px @ 313px */
+           font-size: 12px; 
+           margin: 30px;
+        }
+
+        .character-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding-bottom: 70px;
+            padding-top: 70px;
+        }
+        .character-content1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .name-box h2 {
+            font-family: 'Gliker', 'Poppins', sans-serif;
+            /* 8vw -> 25.04px @ 313px */
+            font-size: 25px; 
+            font-weight: 900;
+            color: black;
+        }
+
+        .image-box {
+            /* 35vw -> 109.55px @ 313px */
+            width: 110px; 
+            max-width: 170px; 
+            /* 45vw -> 140.85px @ 313px */
+            height: 141px; 
+            max-height: 270px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+         .image-box1 {
+            /* 35vw -> 109.55px @ 313px */
+            width: 110px; 
+            max-width: 170px; 
+            /* 75vw -> 234.75px @ 313px */
+            height: 235px; 
+            max-height: 350px;
+            border-radius: 10px;
+        }
+
+        .image-box img {
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .image-box1 img {
+            width: auto;
+            height: 280px; /* Nilai ini mungkin harus diubah karena terlalu besar untuk lebar 313px */
+            object-fit: cover;
+            display: block;
+            padding-left: 28px;
+        }
+        
+        /* ============================================== */
+        /* 4. EFEK DIAGONAL (Membuat "Kuning-kuning") - Konversi ke PX */
+        /* ============================================== */
+
+        .divider-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1; 
+        }
+
+        .divider {
+            position: absolute;
+            width: 150%; 
+            height: 250px; 
+            background-color: #f7f1e3;
+            transform-origin: 0 0; 
+            transform: skewY(-4deg); 
+        }
+
+        .divider-kara {
+            top: 150px; 
+            left: -20%;
+        }
+
+        .divider-wowo {
+            top: 450px; 
+            left: -20%;
+        }
+
+        /* ============================================== */
+        /* 5. KISAH TAKDIR (FOOTER) - Konversi ke PX     */
+        /* ============================================== */
+
+        .story-section {
+            /* 10vw -> 31.3px @ 313px */
+            padding: 40px 31px 20px; 
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .story-section h2 {
+            font-family: 'Gliker', 'Poppins', sans-serif;
+            /* 2.7vw -> 8.45px @ 313px */
+            font-size: 15px; /* Ditingkatkan agar tetap terbaca */
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: black;
+            text-shadow: 0.2px 0.2px 0 #000, -0.2px -0.2px 0 #000;
+        }
+
+        .story-section p {
+            /* 2.8vw -> 8.76px @ 313px */
+            font-size: 14px; /* Ditingkatkan agar tetap terbaca */
+            line-height: 1.6;
+            color: #333;
+            text-align: justify;
+            margin: 0 auto;
+        }
+
+        .story-section strong {
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-wrapper">
+        <div class="divider-container">
+            <div class="divider divider-kara"></div>
+            <div class="divider divider-wowo"></div>
+        </div>
+        
+        <header class="header-section">
+            <h1>Takdir Suci Benang Merah</h1>
+        </header>
+
+        <section class="character-section kara-section">
+            <a href="kara.html" class="character-link">
+                <div class="character-content">
+                    <h2 class="name-box">Kara</h2>
+                    <div class="image-box">
+                        <img src="foto/foto7.png" alt="Foto Kara">
+                    </div>
+                    
+                </div>
+            </a>
+        </section>
+       
+        
+
+        <section class="character-section wowo-section">
+            <a href="wowo.html" class="character-link">
+                <div class="character-content1">
+                    
+                    <div class="image-box1">
+                        <img src="foto/foto6.png" alt="Foto Wowo">
+                    </div>
+                    <h2 class="name-box">Wowo</h2>
+                </div>
+            </a>
+        </section>
+        
+
+        <footer class="story-section">
+            <h2>Kisah Takdir yang Terangkai</h2>
+            <p>
+                <strong>Wowo (Jarum) dan Kara (Pemidangan)</strong> adalah takdir sejati (Tali Lo Hidayati), diciptakan untuk menyempurnakan Karawo, mahakarya Gorontalo. Kara adalah lingkaran abadi yang memberi kestabilan, dan Wowo adalah garis tunggal yang memberi inisiatif. Mereka adalah keseimbangan kosmis–Jarum yang bergerak memerlukan Pemidangan yang kokoh. Sejak sentuhan pertama, mereka terikat janji semesta untuk berpadu.
+            </p>
+        </footer>
+    </div>
+    
+</body>
+</html>
